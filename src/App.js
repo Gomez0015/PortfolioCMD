@@ -1,5 +1,6 @@
 import './App.css';
 import Terminal from 'terminal-in-react';
+import CTFPlugin from './customPlugin/ctfPlugin.js';
 
 function App() {
 
@@ -15,31 +16,34 @@ function App() {
         }}
       >
         <Terminal
+          plugins={[
+            CTFPlugin,
+          ]}
           color='green'
           backgroundColor='black'
           barColor='black'
           startState='maximised'
           style={{ fontWeight: "bold", fontSize: "1em" }}
-          hideTopBar='true'
+          hideTopBar={true}
           commands={{
             linktree: () => {return <ul><li><a href="https://github.com/Gomez0015" target="_blank">Github</a></li><li><a href="https://www.linkedin.com/in/oscargomezceo/" target="_blank">LinkedIn</a></li><li><a href="https://www.youtube.com/channel/UCGxmNncs5ihjB-xk_9UUHyw" target="_blank">Youtube</a></li></ul>},
-            ls: () => 'secret.txt',
-            cat: {
-              method: (args, print, runCommand) => {
-                if(args._[0] != 'secret.txt') {
-                  print('no file called ' + args._[0]);
-                } else {
-                  print('Y0U F0UND TH3 S3CR3T FL4G!');
-                }
-              },
-            },
+            // ls: () => 'secret.txt',
+            // cat: {
+            //   method: (args, print, runCommand) => {
+            //     if(args._[0] != 'secret.txt') {
+            //       print('no file called ' + args._[0]);
+            //     } else {
+            //       print('Y0U F0UND TH3 S3CR3T FL4G!');
+            //     }
+            //   },
+            // },
           }}
           descriptions={{
             show: 'show the motd',
             clear: 'clear the terminal',
             linktree: 'all my links (Github, Youtube, ect)',
-            ls: 'list files in directory',
-            cat: 'read contents of a file',
+            // ls: 'list files in directory',
+            // cat: 'read contents of a file',
           }}
           msg='
 _______                                      ______             ________                     
