@@ -33,10 +33,10 @@ function App() {
                 }
               },
             },
-            showmsg: showMsg,
-            popup: () => alert('Terminal in React')
           }}
           descriptions={{
+            show: 'show the motd',
+            clear: 'clear the terminal',
             linktree: 'all my links (Github, Youtube, ect)',
             ls: 'list files in directory',
             cat: 'read contents of a file',
@@ -52,11 +52,11 @@ Full Stack Developer and Cybersecurity Student
 ‎
 Commands:
 show - show the motd
-clear - clear the screen
+clear - clear the terminal
 help - list all the commands
 linktree - all my links (Github, Youtube, ect)
-showmsg - shows a message
-popup - alert'
+ls - list files in directory
+cat - read contents of a file'
         />
       </div>
     </div>
