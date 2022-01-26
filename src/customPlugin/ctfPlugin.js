@@ -19,7 +19,7 @@ export default class CTFPlugin extends PluginBase {
     };
 
     descriptions = {
-        ls: 'list files',
+        ls: 'list files in current directory',
         cat: 'read a file',
     };
 

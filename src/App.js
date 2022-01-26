@@ -27,23 +27,12 @@ function App() {
           hideTopBar={true}
           commands={{
             linktree: () => {return <ul><li><a href="https://github.com/Gomez0015" target="_blank">Github</a></li><li><a href="https://www.linkedin.com/in/oscargomezceo/" target="_blank">LinkedIn</a></li><li><a href="https://www.youtube.com/channel/UCGxmNncs5ihjB-xk_9UUHyw" target="_blank">Youtube</a></li></ul>},
-            // ls: () => 'secret.txt',
-            // cat: {
-            //   method: (args, print, runCommand) => {
-            //     if(args._[0] != 'secret.txt') {
-            //       print('no file called ' + args._[0]);
-            //     } else {
-            //       print('Y0U F0UND TH3 S3CR3T FL4G!');
-            //     }
-            //   },
-            // },
           }}
           descriptions={{
             show: 'show the motd',
             clear: 'clear the terminal',
+            help: 'list all available commands',
             linktree: 'all my links (Github, Youtube, ect)',
-            // ls: 'list files in directory',
-            // cat: 'read contents of a file',
           }}
           msg='
 _______                                      ______             ________                     
@@ -54,13 +43,9 @@ _  / / /_  ___/  ___/  __ `/_  ___/   _  __ `/_  //_/  __ `/    __  /_/ /  __ `/
 ‎                                                 
 Full Stack Developer and Cybersecurity Student
 ‎
-Commands:
-show - show the motd
+Basic Commands:
 clear - clear the terminal
-help - list all the commands
-linktree - all my links (Github, Youtube, ect)
-ls - list files in directory
-cat - read contents of a file'
+help - list all available commands'
         />
       </div>
     </div>
