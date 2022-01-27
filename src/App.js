@@ -5,6 +5,7 @@ import CTFPlugin from './customPlugin/ctfPlugin.js';
 function App() {
 
   const showMsg = () => 'Hello World'
+
   return (
     <div className="App">
       <div
