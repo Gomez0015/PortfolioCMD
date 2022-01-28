@@ -33,6 +33,10 @@ export default class CTFPlugin extends PluginBase {
         cd: this.enterDir(),
         ls: this.listDirContents(),
         cat: this.readFile(),
+        touch: this.touch(),
+        echo: this.echo(),
+        mkdir: this.mkdir(),
+        rm: this.rm(),
         crackMD5: this.crackMD5(),
         crackSHA1: this.crackSHA1()
     };
@@ -41,6 +45,10 @@ export default class CTFPlugin extends PluginBase {
         cd: 'enter a directory',
         ls: 'list files in current directory',
         cat: 'read a file',
+        touch: 'create a file',
+        echo: 'print text or save it into a file',
+        mkdir: 'create a directory',
+        rm: 'remove a file/dir',
         crackMD5: 'crack MD5 hash',
         crackSHA1: 'crack SHA1 hash'
     };
@@ -61,6 +69,168 @@ export default class CTFPlugin extends PluginBase {
                 const hash = args._[0];
 
                 return crackSHA1(hash);
+            },
+        };
+    }
+
+    rm() {
+        return {
+            method: (args) => {
+                const filename = args._[0];
+                let pluginData = this.api.getData();
+
+                var pieces = (pluginData.currentDir).split('/');
+
+                pieces = pieces.filter(element => {
+                    return element !== '';
+                });
+
+                for (let i = 0; i < pieces.length; i++) {
+                    pieces[i] = pieces[i].replace(/.txt/g, 'txt');
+                }
+
+                pieces.unshift('/');
+
+                var node = pluginData.filesystem;
+                var pathsTraveled = [];
+
+                for (var i = 0; i < pieces.length; ++i) {
+                    node = node[pieces[i]];
+                    pathsTraveled.push(pieces[i]);
+                }
+
+                if (node[filename.replace(/.txt/g, 'txt')]) {
+                    delete node[filename.replace(/.txt/g, 'txt')];
+                    cookies.set('userData', pluginData, { path: '/' });
+                    return 'file deleted';
+                } else {
+                    return 'file does not exist';
+                }
+
+            },
+        };
+    }
+
+    mkdir() {
+        return {
+            method: (args) => {
+                const dirname = args._[0];
+                let pluginData = this.api.getData();
+
+                var pieces = (pluginData.currentDir).split('/');
+
+                pieces = pieces.filter(element => {
+                    return element !== '';
+                });
+
+                for (let i = 0; i < pieces.length; i++) {
+                    pieces[i] = pieces[i].replace(/.txt/g, 'txt');
+                }
+
+                pieces.unshift('/');
+
+                var node = pluginData.filesystem;
+                var pathsTraveled = [];
+
+                for (var i = 0; i < pieces.length; ++i) {
+                    node = node[pieces[i]];
+                    pathsTraveled.push(pieces[i]);
+                }
+
+                if (node[dirname]) {
+                    return 'directory exists';
+                } else {
+                    node[dirname] = {};
+                    cookies.set('userData', pluginData, { path: '/' });
+                    return 'directory created';
+                }
+
+            },
+        };
+    }
+
+    touch() {
+        return {
+            method: (args) => {
+                const filename = args._[0];
+                let pluginData = this.api.getData();
+
+                var pieces = (pluginData.currentDir).split('/');
+
+                pieces = pieces.filter(element => {
+                    return element !== '';
+                });
+
+                for (let i = 0; i < pieces.length; i++) {
+                    pieces[i] = pieces[i].replace(/.txt/g, 'txt');
+                }
+
+                pieces.unshift('/');
+
+                var node = pluginData.filesystem;
+                var pathsTraveled = [];
+
+                for (var i = 0; i < pieces.length; ++i) {
+                    node = node[pieces[i]];
+                    pathsTraveled.push(pieces[i]);
+                }
+
+                if (node[filename.replace(/.txt/g, 'txt')]) {
+                    return 'file exists';
+                } else {
+                    node[filename.replace(/.txt/g, 'txt')] = ' ';
+                    cookies.set('userData', pluginData, { path: '/' });
+                    return 'file created';
+                }
+
+            },
+        };
+    }
+
+    echo() {
+        return {
+            method: (args) => {
+                const textEntered = args._[0];
+                const saveText = args._[1];
+                const fileToSaveIn = args._[2];
+
+                if (saveText == '>>') {
+                    if (!fileToSaveIn) { return 'no file specified to save result' } else {
+                        let pluginData = this.api.getData();
+
+                        var pieces = (pluginData.currentDir).split('/');
+
+                        pieces = pieces.filter(element => {
+                            return element !== '';
+                        });
+
+                        for (let i = 0; i < pieces.length; i++) {
+                            pieces[i] = pieces[i].replace(/.txt/g, 'txt');
+                        }
+
+                        pieces.unshift('/');
+
+                        var node = pluginData.filesystem;
+                        var pathsTraveled = [];
+
+                        for (var i = 0; i < pieces.length; ++i) {
+                            node = node[pieces[i]];
+                            pathsTraveled.push(pieces[i]);
+                        }
+
+                        if (node[fileToSaveIn.replace(/.txt/g, 'txt')]) {
+                            node[fileToSaveIn.replace(/.txt/g, 'txt')] = textEntered;
+                            cookies.set('userData', pluginData, { path: '/' });
+                            return 'file edited';
+                        } else {
+                            return 'file does not exist';
+                        }
+                    }
+                } else if (!saveText) {
+                    return textEntered;
+                } else {
+                    return 'wrong options';
+                }
             },
         };
     }
