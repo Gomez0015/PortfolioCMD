@@ -1,5 +1,7 @@
 import PluginBase from 'terminal-in-react/lib/js/components/Plugin';
 import { flag, filesystem } from './consts';
+import { crackSHA1 } from './encryption/sha1Algo';
+import { crackMd5 } from './encryption/md5Algo';
 const filename = 'sample.txt';
 
 export default class CTFPlugin extends PluginBase {
@@ -20,13 +22,37 @@ export default class CTFPlugin extends PluginBase {
         cd: this.enterDir(),
         ls: this.listDirContents(),
         cat: this.readFile(),
+        crackMD5: this.crackMD5(),
+        crackSHA1: this.crackSHA1()
     };
 
     descriptions = {
         cd: 'enter a directory',
         ls: 'list files in current directory',
         cat: 'read a file',
+        crackMD5: 'crack MD5 hash',
+        crackSHA1: 'crack SHA1 hash'
     };
+
+    crackMD5() {
+        return {
+            method: (args) => {
+                const hash = args._[0];
+
+                return crackMd5(hash);
+            },
+        };
+    }
+
+    crackSHA1() {
+        return {
+            method: (args) => {
+                const hash = args._[0];
+
+                return crackSHA1(hash);
+            },
+        };
+    }
 
     readFile() {
         return {

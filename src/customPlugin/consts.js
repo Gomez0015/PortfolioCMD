@@ -3,12 +3,13 @@ export const filesystem = {
     '/': {
         home: {
             guest: {
-                guesttxt: "Hello Guest!"
+                guesttxt: "00cd8055440d77f6c059deac1b93ab93"
             },
             hometxt: 'Hello Home!'
         },
         root: {
-            roottxt: 'Hello Root!'
+            roottxt: '10c234edb6cedb1bceb0749203c582f399b92b4d'
         }
     }
 }
+export const wordlist = ['hello', 'world', 'guest', 'test', 'easy', 'peasy', 'i', 'love', 'nft', 'R00T FL4G', 'GU3ST FL4G'];
