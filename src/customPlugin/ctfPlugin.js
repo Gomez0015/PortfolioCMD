@@ -15,7 +15,7 @@ export default class CTFPlugin extends PluginBase {
             api.setData({
                 currentDir: '/',
                 currentUser: 'guest',
-                filesystem: filesystem,
+                filesystem: defaultFilesystem,
             });
             const cookies = new Cookies();
             cookies.set('userData', api.getData(), { path: '/' });
