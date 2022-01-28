@@ -2,6 +2,8 @@ import PluginBase from 'terminal-in-react/lib/js/components/Plugin';
 import { flag, filesystem } from './consts';
 import { crackSHA1 } from './encryption/sha1Algo';
 import { crackMd5 } from './encryption/md5Algo';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 const filename = 'sample.txt';
 
 export default class CTFPlugin extends PluginBase {
@@ -9,11 +11,20 @@ export default class CTFPlugin extends PluginBase {
     static version = '1.0.0';
 
     constructor(api, config) {
-        api.setData({
-            currentDir: '/',
-            currentUser: 'guest'
-        });
-        api.setPromptPrefix('/@' + 'guest' + ':~');
+        if (cookies.get('userData') == undefined) {
+            api.setData({
+                currentDir: '/',
+                currentUser: 'guest',
+                filesystem: filesystem,
+            });
+            const cookies = new Cookies();
+            cookies.set('userData', api.getData(), { path: '/' });
+            api.setPromptPrefix('/@' + 'guest' + ':~');
+        } else {
+            api.setData(cookies.get('userData'));
+            api.setPromptPrefix(api.getData().currentDir + '@' + api.getData().currentUser + ':~');
+        }
+
         api.setPromptSymbol('$');
         super(api, config);
     }
@@ -71,7 +82,7 @@ export default class CTFPlugin extends PluginBase {
 
                 pieces.unshift('/');
 
-                var node = filesystem;
+                var node = pluginData.filesystem;
 
                 for (var i = 0; i < pieces.length; ++i) {
                     console.log(node)
@@ -100,7 +111,7 @@ export default class CTFPlugin extends PluginBase {
 
             pieces.unshift('/');
 
-            var node = filesystem;
+            var node = pluginData.filesystem;
 
             for (var i = 0; i < pieces.length; ++i) {
                 node = node[pieces[i]];
@@ -139,6 +150,7 @@ export default class CTFPlugin extends PluginBase {
                     this.api.setPromptPrefix(newPath + '@' + pluginData.currentUser + ':~');
                     pluginData.currentDir = newPath;
                     this.api.setData(pluginData);
+                    cookies.set('userData', pluginData, { path: '/' });
                 } else {
 
                     var pieces = (args._[0] + '/').split('/');
@@ -153,7 +165,7 @@ export default class CTFPlugin extends PluginBase {
                         return element !== '';
                     });
 
-                    var node = filesystem['/'];
+                    var node = pluginData.filesystem['/'];
 
                     for (let i = 0; i < currentDirArray.length; i++) {
                         node = node[currentDirArray[i]];
@@ -175,6 +187,7 @@ export default class CTFPlugin extends PluginBase {
                         this.api.setPromptPrefix(newPath + '@' + pluginData.currentUser + ':~');
                         pluginData.currentDir = newPath;
                         this.api.setData(pluginData);
+                        cookies.set('userData', pluginData, { path: '/' });
                     }
                 }
             },
