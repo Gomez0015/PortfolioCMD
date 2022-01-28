@@ -14,7 +14,7 @@ I setup a simple way for filesystems to work with no hard coding needed,
 this is what the object looks like:
 
 ```
-export const filesystem = {
+export const defaultFilesystem = {
     '/': {
         home: {
             guest: {
@@ -36,7 +36,7 @@ loop through the object using nodes to go all the way down the filesystem.
 
 I also added a `cat` command which will read any txt file in your current directory defined by the `(filename)txt` properties in the filesystem.
 
-## Thursday Jan 28 @ 1:06 AM
+## Friday Jan 28 @ 1:06 AM
 
 Today I added commands `crackMD5 (hash)` and `crackSHA1 (hash)`,
 to be able to match the MD5 and SHA1 hashed with the wordlist defined by the coder,
@@ -47,3 +47,8 @@ export const wordlist = ['hello', 'world', 'guest', 'test', 'easy', 'peasy', 'i'
 ```
 
 I also added cookies to save the current Directory
+
+## Friday Jan 28 @ 5:21 PM
+
+I just added `touch (filename)` to create new files, `mkdir (dirName)` to create new directories,
+`rm (file/dir name)` to remove files and directories, finally I added `echo (text) (null or >> (filename))` to save text into files or just print it out!
