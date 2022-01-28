@@ -45,3 +45,5 @@ using the template below:
 ```
 export const wordlist = ['hello', 'world', 'guest', 'test', 'easy', 'peasy', 'i', 'love', 'nft', 'R00T FL4G', 'GU3ST FL4G'];
 ```
+
+I also added cookies to save the current Directory
