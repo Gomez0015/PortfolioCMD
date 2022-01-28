@@ -1,5 +1,5 @@
 import PluginBase from 'terminal-in-react/lib/js/components/Plugin';
-import { flag, filesystem } from './consts';
+import { flag, defaultFilesystem } from './consts';
 import { crackSHA1 } from './encryption/sha1Algo';
 import { crackMd5 } from './encryption/md5Algo';
 import Cookies from 'universal-cookie';

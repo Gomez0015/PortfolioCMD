@@ -1,5 +1,5 @@
 export const flag = 'Y0U F0UND TH3 S3CR3T FL4G!';
-export const filesystem = {
+export const defaultFilesystem = {
     '/': {
         home: {
             guest: {
