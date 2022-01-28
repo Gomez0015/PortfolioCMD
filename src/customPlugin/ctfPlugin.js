@@ -141,17 +141,26 @@ export default class CTFPlugin extends PluginBase {
                     this.api.setData(pluginData);
                 } else {
 
-                    var pieces = (pluginData.currentDir + args._[0] + '/').split('/');
+                    var pieces = (args._[0] + '/').split('/');
 
                     pieces = pieces.filter(element => {
                         return element !== '';
                     });
 
-                    pieces.unshift('/')
+                    var currentDirArray = pluginData.currentDir.split('/');
 
-                    var node = filesystem;
+                    currentDirArray = currentDirArray.filter(element => {
+                        return element !== '';
+                    });
+
+                    var node = filesystem['/'];
+
+                    for (let i = 0; i < currentDirArray.length; i++) {
+                        node = node[currentDirArray[i]];
+                    }
 
                     for (var i = 0; i < pieces.length; ++i) {
+                        console.log(node, pieces[i]);
                         node = node[pieces[i]];
                         if (node) {
                             break;
