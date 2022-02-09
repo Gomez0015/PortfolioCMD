@@ -19,13 +19,13 @@ export default class CTFPlugin extends PluginBase {
             });
             const cookies = new Cookies();
             cookies.set('userData', api.getData(), { path: '/' });
-            api.setPromptPrefix('/@' + 'guest' + ':~');
+            api.setPromptPrefix('/@' + 'guest');
         } else {
             api.setData(cookies.get('userData'));
-            api.setPromptPrefix(api.getData().currentDir + '@' + api.getData().currentUser + ':~');
+            api.setPromptPrefix(api.getData().currentDir + '@' + api.getData().currentUser);
         }
 
-        api.setPromptSymbol('$');
+        api.setPromptSymbol(' >');
         super(api, config);
     }
 
@@ -317,7 +317,7 @@ export default class CTFPlugin extends PluginBase {
                         newPath = '/' + newPath.join('/') + '/';
                     }
 
-                    this.api.setPromptPrefix(newPath + '@' + pluginData.currentUser + ':~');
+                    this.api.setPromptPrefix(newPath + '@' + pluginData.currentUser);
                     pluginData.currentDir = newPath;
                     this.api.setData(pluginData);
                     cookies.set('userData', pluginData, { path: '/' });
@@ -354,7 +354,7 @@ export default class CTFPlugin extends PluginBase {
                     } else {
                         var newPath = pluginData.currentDir + args._[0] + '/';
 
-                        this.api.setPromptPrefix(newPath + '@' + pluginData.currentUser + ':~');
+                        this.api.setPromptPrefix(newPath + '@' + pluginData.currentUser);
                         pluginData.currentDir = newPath;
                         this.api.setData(pluginData);
                         cookies.set('userData', pluginData, { path: '/' });
