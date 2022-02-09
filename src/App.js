@@ -17,9 +17,9 @@ function App() {
         }}
       >
         <Terminal
-          plugins={[
-            CTFPlugin,
-          ]}
+          // plugins={[
+          //   CTFPlugin,
+          // ]}
           color='green'
           backgroundColor='black'
           barColor='black'
