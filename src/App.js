@@ -78,7 +78,7 @@ function App() {
                   failure mindset, which ended up in me creating my youtube
                   channel to help other people learn! In April of 2022, I finished
                   the CyberSecurity Bootcamp at IronHack. Since then have been accepted 
-                  into a CyberSecurity masters program at Ecole 2600 & founded CTF Cafe
+                  into a CyberSecurity masters program at Ecole 2600 & founded CTF Cafe.
                   I have worked with many companies and individuals, created my own startups some flopped and some
                   worked very well, I have participated in CTF competitions and
                   created many open source projects. All in hopes to help grow
